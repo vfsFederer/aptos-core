@@ -393,7 +393,6 @@ impl EpochManager {
         tokio::spawn(quorum_store.start(consensus_to_quorum_store_rx));
     }
 
-    ///this function spawns QuorumStore
     fn spawn_quorum_store(
         &mut self,
         config: QuorumStoreConfig,
@@ -457,7 +456,7 @@ impl EpochManager {
         batch_reader
     }
 
-    fn spawn_quorum_wrapper(
+    fn spawn_quorum_store_wrapper(
         &mut self,
         network_sender: NetworkSender,
         consensus_to_quorum_store_rx: Receiver<WrapperCommand>,
@@ -648,7 +647,7 @@ impl EpochManager {
             self.data_manager
                 .new_epoch(data_reader.clone(), consensus_to_quorum_store_tx.clone());
 
-            self.spawn_quorum_wrapper(
+            self.spawn_quorum_store_wrapper(
                 network_sender.clone(),
                 consensus_to_quorum_store_rx,
                 wrapper_quorum_store_tx,

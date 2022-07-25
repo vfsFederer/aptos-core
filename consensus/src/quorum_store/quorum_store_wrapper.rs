@@ -320,7 +320,7 @@ impl QuorumStoreWrapper {
             let _timer = counters::WRAPPER_MAIN_LOOP.start_timer();
 
             tokio::select! {
-                Some(_s) = shutdown.next() => {
+                Some(_) = shutdown.next() => {
                     break;
                 },
 
